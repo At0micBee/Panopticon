@@ -122,8 +122,6 @@ and to install them all, use:
 
 --
 
-# TODO: add license
-
 # Authors
 
 Codebase written by Hugo G. Vivien (Laboratoire d'Astrophysique de Marseille),
