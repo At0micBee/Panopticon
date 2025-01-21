@@ -3,7 +3,7 @@
 # Description
 
 Machine Learning pipeline for PLATO data. We use a CNN to analyze simulated data to prepare for real
-data reduction in the near future.
+data analysis in the near future.
 
 The project is currently under development, more features and usage cases are coming.
 
