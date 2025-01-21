@@ -1,0 +1,107 @@
+# Default values to run the Model
+
+##################################################
+# Dataset creation
+##################################################
+
+# The path to the light curves
+path_data = '/data/Plato_sim_data/SimusOut'
+
+# The path to the prepared data
+path_prepared = '/data/Plato_sim_data/prepared_T'
+
+# The path whe the output will be written
+path_output = '/data/panopticon_out'
+
+# Manual seed for the SubSet Generator
+# /!\ KEEP THE SAME FOR TRAINING AND EVALUATING THE SAME BATCH /!\
+seed = 101
+
+# Number of maximum training epochs
+training_epochs = 2
+
+# Are we starting from an existing model?
+# -> false if not, path to the model if yes
+# <!> Make sure the architecture is the same </!>
+base_model = false
+
+# Are we exporting the datasets files
+export_sets = false
+
+##################################################
+# Model parameters
+##################################################
+
+[model]
+name = "Panopticon_U3P"
+loss = "BCELoss"
+activation = "Sigmoid"
+
+[model.general]
+channels_in = 1
+channels_out = 1
+init_features = 16
+drop_rate = 0.05
+
+[model.convolution]
+kernel_size = 31
+dilation = 1
+padding = 15
+padding_mode = "reflect"
+bias = false
+
+[model.trans_conv]
+kernel_size = 2
+stride = 2
+bias = true
+
+##################################################
+# Dataloader parameters
+##################################################
+
+# The fractions of training, validation and testing data (must sum to 1)
+[fraction]
+train = 0.001
+valid = 0.999
+
+# Dataloaders parameters, must be passable to dataloader as **kwargs
+[dataloader.train]          # Training parameters
+batch_size = 3
+shuffle = true
+num_workers = 3
+drop_last = true
+prefetch_factor = 2
+persistent_workers = true
+pin_memory = true
+
+[dataloader.valid]          # Validation parameters
+batch_size = 3
+shuffle = false
+num_workers = 3
+drop_last = true
+prefetch_factor = 2
+persistent_workers = true
+pin_memory = true
+
+##################################################
+# Learning tools parameters
+##################################################
+
+[optimizer]
+name = "Adam"
+[optimizer.kwargs]
+lr = 0.001
+
+[scheduler]
+name = "ExponentialLR"
+use = false
+[scheduler.kwargs]
+gamma = 0.9
+
+##################################################
+# Bounds to be removed from the dataset
+##################################################
+
+[bounds]
+radius_star = [0.0, 2.5]
+transit_depth = [50e-6, 1.0]

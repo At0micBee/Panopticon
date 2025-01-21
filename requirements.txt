@@ -1,0 +1,13 @@
+colormaps==0.4.0
+ignite==1.1.0
+matplotlib==3.6.2
+numpy==1.24.3
+pandas==1.5.2
+pytorch_ignite==0.4.12
+scipy==1.12.0
+termcolor==2.4.0
+toml==0.10.2
+torch==2.0.1
+torchmetrics==0.11.4
+torchsummary==1.5.1
+torchvision==0.15.2
